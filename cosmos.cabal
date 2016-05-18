@@ -1,0 +1,74 @@
+name: cosmos
+version: 0.0.0
+cabal-version: >=1.10
+build-type: Simple
+license: MIT
+license-file: LICENSE.md
+maintainer: Michael Litchard
+synopsis: TODO
+description:
+    <https://github.com/mlitchard/cosmos#readme>
+category: TODO
+extra-source-files:
+    README.md
+    stack.yaml
+
+source-repository head
+    type: git
+    location: https://github.com/mlitchard/cosmos
+
+Flag dev
+    Description:   Turn on development settings, like auto-reload templates.
+    Default:       False
+
+executable cosmos
+    if flag(dev)
+        cpp-options:   -DDEVELOPMENT
+        ghc-options:   -Wall -threaded -O0
+    else
+        ghc-options:   -Wall -threaded -O2
+
+    main-is: Main.hs
+    hs-source-dirs: executable
+    
+    build-depends:
+        base                 == 4.8.*
+      , Earley               == 0.10.1.0
+      , cosmos
+library
+    exposed-modules:
+           Types.Parser.Types
+         , Data
+         , Recognizer
+    build-depends:
+        base                 
+      , mtl                  
+      , Earley               
+      , semigroups
+      , unordered-containers 
+    default-language: Haskell2010
+    hs-source-dirs: library
+    ghc-options: -Wall
+
+test-suite cosmos-test-suite
+    type: exitcode-stdio-1.0
+    main-is: TestSuite.hs
+    build-depends:
+        base -any,
+        cosmos -any,
+        tasty ==0.11.0.2,
+        tasty-hspec ==1.1.2
+    default-language: Haskell2010
+    hs-source-dirs: test-suite
+    ghc-options: -threaded -Wall -Werror
+
+benchmark cosmos-benchmark
+    type: exitcode-stdio-1.0
+    main-is: Benchmark.hs
+    build-depends:
+        base -any,
+        cosmos -any,
+        criterion ==1.1.0.0
+    default-language: Haskell2010
+    hs-source-dirs: benchmark
+    ghc-options: -threaded -Wall

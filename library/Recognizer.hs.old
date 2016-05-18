@@ -1,0 +1,34 @@
+{-# LANGUAGE RecursiveDo #-}
+module Recognizer 
+  (sentence)
+  where
+
+import Control.Applicative
+import Text.Earley
+import Types.Parser.Types
+import Data
+import qualified Data.HashSet as HS
+
+sentence :: Grammar r (Prod r String String Sentence)
+sentence = mdo
+  noun        <- rule $ satisfy (`HS.member` nouns)        <?> "noun"
+  verb        <- rule $ satisfy (`HS.member` verbs)        <?> "verb"
+  determiner  <- rule $ satisfy (`HS.member` determiners)  <?> "determiner"
+  actor       <- rule $ satisfy (`HS.member` actors)       <?> "actors"
+  preposition <- rule $ satisfy (`HS.member` prepositions) <?> "preposition"
+  adjective   <- rule $ satisfy (`HS.member` adjectives)   <?> "adjectives"
+  nounPhrase  <- rule $  Type1_NP <$> determiner <*> nounPhrase
+                     <|> Type2_NP <$> adjective  <*> nounPhrase
+                     <|> Type3_NP <$> noun
+                     <?> "noun phrase"
+  verbPhrase  <- rule $  VerbPhrase <$> verb <*> nounPhrase
+                     <|> Verb <$> verb
+
+  prepPhrase  <- rule $ PrepPhrase <$> preposition <*> nounPhrase
+
+  fragment    <- rule $  Type1_SF <$> nounPhrase
+                     <|> Type2_SF <$> prepPhrase <*> nounPhrase
+  
+  return $  Type1_S <$> verbPhrase <*> fragment
+        <|> Type2_S <$> actor <*> verbPhrase <*> fragment 
+                     
