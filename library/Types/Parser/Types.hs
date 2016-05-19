@@ -1,7 +1,7 @@
 {-# LANGUAGE RecursiveDo #-}
 
 module Types.Parser.Types
-  ( Sentence   (..)
+  ( Imperative   (..)
   , VerbPhrase (..)
   , NounPhrase (..)
   , PrepPhrase (..)
@@ -14,16 +14,18 @@ module Types.Parser.Types
   ) where
 
 
-data Sentence = Type1 VerbPhrase NounPhrase
-              | Type2 VerbPhrase PrepPhrase
-              | Command Verb
-                 deriving Show
+data Imperative = Type1 VerbPhrase NounPhrase
+                | Type2 VerbPhrase PrepPhrase
+                | Type3 VerbPhrase NounPhrase PrepPhrase
+                | ImperativeClause Verb
+                  deriving Show
 
 type Noun        = String
 type Verb        = String
 type Determiner  = String
 type Preposition = String
 type Adjective   = String
+type Number      = String
 
 data VerbPhrase = VerbPhrase1 Verb NounPhrase
                 | Verb Verb
@@ -31,6 +33,7 @@ data VerbPhrase = VerbPhrase1 Verb NounPhrase
 
 data NounPhrase = NounPhrase1 Determiner NounPhrase
                 | NounPhrase2 Determiner AdjPhrase NounPhrase
+                | NounPhrase3 Number Noun
                 | Noun Noun
                    deriving Show
 
