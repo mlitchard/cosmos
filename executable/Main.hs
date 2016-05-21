@@ -1,8 +1,8 @@
+{-# LANGUAGE OverloadedStrings #-}
 module Main where
 
+import ClassyPrelude
 import Text.Earley
-import Types.Parser.Types
-import Data
 import Recognizer
 
 main :: IO ()
