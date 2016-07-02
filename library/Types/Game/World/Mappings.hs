@@ -23,7 +23,7 @@ data Interactives
     
 data LocationMap = LocationMap LID Location
 
-data OuterSpace 
-  = LocationSP (Octree SpaceObjectID)
-  | ObjectMapSP (M.Map SpaceObjectID SpaceObject) 
+-- data OuterSpace 
+--  = LocationSP (Octree SpaceObjectID)
+--  | ObjectMapSP (M.Map SpaceObjectID SpaceObject) 
 

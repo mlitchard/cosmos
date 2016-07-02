@@ -1,8 +1,8 @@
-module Types.Games.World.Objects
-  ( OuterSpace     (..)
-  , Celestial      (..)
+module Types.Game.World.Objects
+  ( --OuterSpace     (..)
+    Celestial      (..)
   , CelestialSpace (..)
-  , Location       (..)
+--  , Location       (..)
   , PPOI           (..)
   , RefuelingDepot (..)
   , ShipRepair     (..)
@@ -16,11 +16,6 @@ import qualified Data.Map.Strict as M
 import           Data.Octree
 import           Types.Game.Common.Atomic
 
-
-data OuterSpace
-  = LocationSP (Octree SpaceObjectID)
-  | ObjectMapSP (M.Map SpaceObjectID SpaceObject)
-
 data SpaceObjectID
   = ShipSPID SID
   | CelestialID CID
@@ -30,22 +25,21 @@ data Celestial = Celestial
   , players_in_orbit :: [(Orbit,AID)]
   , residents        :: [(AID,PPOI)]
   , neighbors        :: [PlanetName]
-  , map              :: LocationMap
+--  , map              :: LocationMap
   }
 
 data CelestialSpace = CelestialSpace
-  { agents        :: [AID]
-  , locations     :: LocationMap
+  { agentsCS        :: [AID]
+--  , locations     :: LocationMap
   , agent_history :: M.Map AID Timer
-  , mobiles       :: [MID]
   }
 
-data Location = Location
-  { agents       :: [AID]
-  , mobiles      :: [MID]
-  , description  :: Text
-  , interactives :: [IID]
-  }
+-- data Location = Location
+--  { agentsLOC       :: [AID]
+--  , mobiles      :: [MID]
+--  , description  :: Text
+--  , interactives :: [IID]
+--  }
 
 data PPOI 
   = RF_Depot RefuelingDepot
@@ -56,7 +50,7 @@ data PPOI
 data RefuelingDepot = RefuelingDepot
   { desc_rd :: Text
   , fuel    :: PInt
-  , timer   :: RefuelTimer
+--  , timer   :: RefuelTimer
   } deriving Show
 
 data ShipRepair = ShipRepair

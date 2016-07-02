@@ -1,6 +1,6 @@
 name: cosmos
 version: 0.0.0
-cabal-version: >=1.10
+cabal-version: >=1.20
 build-type: Simple
 license: MIT
 license-file: LICENSE.md
@@ -22,34 +22,34 @@ Flag dev
     Default:       False
 
 executable cosmos
+    default-language:  Haskell2010
     if flag(dev)
         cpp-options:   -DDEVELOPMENT
         ghc-options:   -Wall -threaded -O0
     else
         ghc-options:   -Wall -threaded -O2
    
-    default-extensions: NoImplicitPrelude
     main-is: Main.hs
     hs-source-dirs: executable
     
     build-depends:
-        base                 
+        base
+      , AC-Vector                 
       , classy-prelude
       , Earley               
       , cosmos
 library
     default-language:  Haskell2010
-    default-extensions: NoImplicitPrelude
     other-extensions:  OverloadedStrings
                      , RecursiveDo
 
     exposed-modules:
            Types.Parser.Types
          , Types.Game.Common.Atomic
-         , Types.Game.World.Mappings
-         , Types.Game.World.Objects
-         , Data
-         , Recognizer
+--         , Types.Game.World.Mappings
+         , Engine.Data
+         , Engine.Recognizer
+         , Game.Physics
     build-depends:
         base
       , classy-prelude
@@ -58,21 +58,22 @@ library
       , Earley               
       , semigroups
       , text
+      , unordered-containers
       , Octree 
-  
-      , unordered-containers 
+      , AC-Vector
     default-language: Haskell2010
     hs-source-dirs: library
     ghc-options: -Wall
 
 test-suite cosmos-test-suite
+    default-language:  Haskell2010
     type: exitcode-stdio-1.0
     main-is: TestSuite.hs
     build-depends:
         base -any,
         cosmos -any,
-        tasty ==0.11.0.2,
-        tasty-hspec ==1.1.2
+        tasty, 
+        tasty-hspec
     default-language: Haskell2010
     hs-source-dirs: test-suite
     ghc-options: -threaded -Wall -Werror

@@ -1,14 +1,17 @@
 {-# LANGUAGE RecursiveDo #-}
+{-# LANGUAGE OverloadedStrings #-}
 
-module Recognizer (imperative) where
+module Engine.Recognizer (imperative) where
 
-import           ClassyPrelude
+import Prelude
+import Data.Text
+import Control.Applicative
 
 import qualified Data.HashSet as HS
 import           Text.Earley
 
 import           Types.Parser.Types
-import           Data
+import           Engine.Data
 
 imperative :: Grammar r (Prod r Text Text Imperative)
 imperative = mdo

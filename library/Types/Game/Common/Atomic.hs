@@ -18,7 +18,7 @@ module Types.Game.Common.Atomic
   , Price
   , Menu           (..)
   , ResourceName   (..)
-  , RefuelTimer    (..)
+  , Timer          (..)
   , ToPlanetName   (..)
   , FromPlanetName (..)
   , WarpSpeed      (..)
@@ -29,9 +29,8 @@ module Types.Game.Common.Atomic
   , CargoSize      (..)
   ) where
 
-import ClassyPrelude
 import Control.Applicative (Const (..))
-
+import Data.Text
 data PlanetName 
   = Vulcan
   | Mongo

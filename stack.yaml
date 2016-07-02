@@ -1,14 +1,18 @@
 # For more information, see: http://docs.haskellstack.org/en/stable/yaml_configuration.html
 
 # Specifies the GHC version and set of packages available (e.g., lts-3.5, nightly-2015-09-21, ghc-7.10.2)
-resolver: lts-4.2
+resolver: lts-6.5
 
 # Local packages, usually specified by relative directory name
 packages:
-        - '.'
+- '.'
+- location:
+    git: git@github.com:mlitchard/octree.git
+    commit: d89c268d5480551c1f098e85d0a8dffa7c69c5a8
 
 # Packages to be pulled from upstream that are not in the resolver (e.g., acme-missiles-0.3)
-extra-deps: [Earley-0.10.1.0]
+extra-deps: 
+- Earley-0.10.1.0
 
 # Override default flag values for local packages and extra-deps
 flags: {}

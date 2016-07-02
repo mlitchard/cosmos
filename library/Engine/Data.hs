@@ -1,5 +1,5 @@
 {-# LANGUAGE OverloadedStrings #-}
-module Data 
+module Engine.Data 
   ( nouns
   , verbs
   , determiners
@@ -9,7 +9,9 @@ module Data
   , numbers
   ) where
 
-import ClassyPrelude
+import Prelude
+import Data.Text hiding (map)
+import Data.Semigroup
 
 import qualified Data.HashSet as HS
 

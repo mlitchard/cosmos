@@ -12,7 +12,8 @@ module Types.Parser.Types
   , Adjective
   ) where
 
-import ClassyPrelude
+import Prelude
+import Data.Text
 
 data Imperative = Type1 VerbPhrase NounPhrase
                 | Type2 VerbPhrase PrepPhrase
